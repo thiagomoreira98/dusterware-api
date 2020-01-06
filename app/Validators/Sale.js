@@ -9,7 +9,8 @@ class Sale {
 
   get rules () {
     return {
-      payment_method: 'required'
+      payment_method: 'required',
+      quantity_installments: 'required'
     }
   }
 

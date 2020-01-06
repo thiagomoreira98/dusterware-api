@@ -9,7 +9,7 @@ class SaleController {
     return sales
   }
 
-  async store ({ request }) {
+  async store ({ request, response }) {
     const data = request.only([
       'tupperware_id',
       'consumer_id',
@@ -18,6 +18,11 @@ class SaleController {
       'description',
       'consumer_name'
     ])
+
+    if(!data.consumer_id && !data.consumer_name) {
+      return response.status(400).send({ message: 'Informe o nome do consumidor' })
+    }
+
     const sale = await Sale.create(data)
     return sale
   }
@@ -30,15 +35,17 @@ class SaleController {
   async update ({ params, request }) {
     const sale = await Sale.findOrFail(params.id)
     const data = request.only([
-      'name',
-      'phone_number',
-      'address', 
-      'house_number',
-      'neighborhood',
-      'zip_code',
-      'state',
-      'country'
+      'tupperware_id',
+      'consumer_id',
+      'payment_method', 
+      'quantity_installments',
+      'description',
+      'consumer_name'
     ])
+
+    if(!data.consumer_id && !data.consumer_name) {
+      return response.status(400).send({ message: 'Informe o nome do consumidor' })
+    }
 
     sale.merge(data)
     await sale.save()
