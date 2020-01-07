@@ -5,7 +5,7 @@ const Tupperware = use('App/Models/Tupperware')
 class TupperwareController {
   async index ({ params, request }) {
     const { page = 1 } = request.get()
-    const tupperwares = await Tupperware.query().paginate(page)
+    const tupperwares = await Tupperware.query().with('pictures').paginate(page)
     return tupperwares
   }
 
@@ -22,6 +22,7 @@ class TupperwareController {
 
   async show ({ params }) {
     const tupperware = await Tupperware.findOrFail(params.id)
+    await tupperware.load('pictures')
     return tupperware
   }
 

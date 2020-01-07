@@ -14,7 +14,7 @@ class ConsumerSchema extends Schema {
       table.string('neighborhood', 100)
       table.integer('zip_code')
       table.string('state', 100)
-      table.string('country', 100)
+      table.string('city', 150)
       table.timestamps()
     })
   }

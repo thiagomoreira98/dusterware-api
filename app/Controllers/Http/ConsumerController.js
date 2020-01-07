@@ -17,7 +17,7 @@ class ConsumerController {
       'neighborhood',
       'zip_code',
       'state',
-      'country'
+      'city'
     ])
     const consumer = await Consumer.create(data)
     return consumer
@@ -38,7 +38,7 @@ class ConsumerController {
       'neighborhood',
       'zip_code',
       'state',
-      'country'
+      'city'
     ])
     consumer.merge(data)
     await consumer.save()

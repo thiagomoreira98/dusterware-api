@@ -32,7 +32,7 @@ class SaleController {
     return sale
   }
 
-  async update ({ params, request }) {
+  async update ({ params, request, response }) {
     const sale = await Sale.findOrFail(params.id)
     const data = request.only([
       'tupperware_id',
@@ -50,11 +50,6 @@ class SaleController {
     sale.merge(data)
     await sale.save()
     return sale
-  }
-
-  async destroy ({ params }) {
-    const sale = await Sale.findOrFail(params.id)
-    sale.delete()
   }
 }
 
